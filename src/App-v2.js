@@ -53,6 +53,10 @@ export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
 
+  fetch("https://www.omdbapi.com/?i=tt3896198&apikey=fd9ac62e&s=green")
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+
   return (
     <>
       <Nav>
