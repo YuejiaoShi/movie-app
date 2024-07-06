@@ -138,7 +138,7 @@ function Loader() {
 }
 
 function ErrMessage({ message }) {
-  return <p className="error">{message}</p>;
+  return <p className="error">❌ {message}</p>;
 }
 
 function Box({ children }) {
