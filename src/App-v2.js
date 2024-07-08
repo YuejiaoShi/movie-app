@@ -51,6 +51,7 @@ const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 export default function App() {
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
@@ -61,8 +62,9 @@ export default function App() {
     async function fetchMovies() {
       try {
         setIsLoading(true);
+        setErr("");
         const res = await fetch(
-          `https://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${Query}`
+          `https://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`
         );
         if (!res.ok) throw new Error("Failed to fetch movies");
         const data = await res.json();
@@ -75,14 +77,20 @@ export default function App() {
         setIsLoading(false);
       }
     }
+
+    if (!query.length) {
+      setMovies([]);
+      setErr("");
+      return;
+    }
     fetchMovies();
-  }, []);
+  }, [query]);
 
   return (
     <>
       <Nav>
         <Logo />
-        <Search />
+        <Search query={query} setQuery={setQuery}/>
         <NumResults movies={movies} />
       </Nav>
       <Main>
@@ -110,8 +118,7 @@ function Logo() {
     </div>
   );
 }
-function Search() {
-  const [query, setQuery] = useState("");
+function Search({ query, setQuery }) {
   return (
     <input
       className="search"
