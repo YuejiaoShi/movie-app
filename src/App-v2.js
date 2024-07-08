@@ -56,7 +56,6 @@ export default function App() {
   const [watched, setWatched] = useState(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState("");
-  const Query = "green";
 
   useEffect(function () {
     async function fetchMovies() {
@@ -83,6 +82,7 @@ export default function App() {
       setErr("");
       return;
     }
+    
     fetchMovies();
   }, [query]);
 
