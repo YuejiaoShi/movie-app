@@ -183,6 +183,21 @@ const isWatched = watched.map(movie=>movie.imdbID).includes(selectedId);
   }
 // cSpell:ignore imdb
 
+useEffect(
+  function () {
+    function Escape(e) {
+      if (e.code === "Escape") {
+        onCloseMovieDetails();
+      }
+    }
+    document.addEventListener("keydown", Escape);
+
+    return function () {
+      document.removeEventListener("keydown", Escape);
+    };
+  },
+  [onCloseMovieDetails]
+);
 
   useEffect(
     function () {
