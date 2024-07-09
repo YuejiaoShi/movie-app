@@ -35,9 +35,9 @@ export default function StarRating({
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
 
-  function handleRating(index) {
-    setRating(index + 1);
-    // onSetRating ? onSetRating(rating) : undefined;
+  function handleRating(rating) {
+    setRating(rating);
+    onSetRating(rating);
   }
   const textStyle = {
     lineHeight: "1",
