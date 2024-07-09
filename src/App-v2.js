@@ -14,6 +14,8 @@ export default function App() {
   const [err, setErr] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
+  document.title="usePopcorn";
+  
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (selectedId === id ? null : id));
   }
@@ -200,11 +202,13 @@ const isWatched = watched.map(movie=>movie.imdbID).includes(selectedId);
 
   useEffect(function(){
     if(!title) return;
-    document.title=`Movie | ${title}`
-  },
+    document.title=`Movie | ${title}`;
+
+  return function(){
+    document.title="usePopcorn";
+  };
   
-  
-  [title]);
+},[title]);
 
   return (
     <div className="details">
