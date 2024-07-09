@@ -21,6 +21,9 @@ export default function App() {
   function handleCloseMovieDetails() {
     setSelectedId(null);
   }
+  function handleAddWatched(movie) {
+    setWatched(watched=>[...watched, movie]);
+  }
 
   useEffect(
     function () {
@@ -74,6 +77,7 @@ export default function App() {
             <MovieDetails
               selectedId={selectedId}
               onCloseMovieDetails={handleCloseMovieDetails}
+              onAddWatched={handleAddWatched}
             />
           ) : (
             <>
@@ -139,7 +143,7 @@ function Box({ children }) {
   );
 }
 
-function MovieDetails({ selectedId, onCloseMovieDetails }) {
+function MovieDetails({ selectedId, onCloseMovieDetails, onAddWatched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -155,6 +159,21 @@ function MovieDetails({ selectedId, onCloseMovieDetails }) {
     Director: director,
     Genre: genre,
   } = movie;
+
+  function handleAdd() {
+    const newWatchedMovie = {
+      imdbID: selectedId,
+      title,
+      year,
+      poster,
+      imdbRating: Number(imdbRating),
+      runtime: Number(runtime.split(" ").at(0)),
+    };
+
+    onAddWatched(newWatchedMovie);
+  }
+// cSpell:ignore imdb
+
 
   useEffect(
     function () {
@@ -198,6 +217,7 @@ function MovieDetails({ selectedId, onCloseMovieDetails }) {
           <section>
             <div className="rating">
               <StarRating maxRating={10} size={24} />
+              <button className="btn-add" onClick={handleAdd}>+ Add to list</button>
             </div>
             <p><em>{plot}</em></p>
             <p>Starring {actors}</p>
@@ -273,9 +293,8 @@ function WatchedMovieList({ watched }) {
 function WatchedMovie({ movie }) {
   return (
     <li>
-      s
-      <img src={movie.Poster} alt={`${movie.Title} poster`} />
-      <h3>{movie.Title}</h3>
+      <img src={movie.poster} alt={`${movie.title} poster`} />
+      <h3>{movie.title}</h3>
       <div>
         <p>
           <span>⭐️</span>
