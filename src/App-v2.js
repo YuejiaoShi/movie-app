@@ -198,6 +198,14 @@ const isWatched = watched.map(movie=>movie.imdbID).includes(selectedId);
     [selectedId]
   );
 
+  useEffect(function(){
+    if(!title) return;
+    document.title=`Movie | ${title}`
+  },
+  
+  
+  [title]);
+
   return (
     <div className="details">
       {isLoading ? (
