@@ -175,6 +175,7 @@ const isWatched = watched.map(movie=>movie.imdbID).includes(selectedId);
     };
 
     onAddWatched(newWatchedMovie);
+    onCloseMovieDetails()
   }
 // cSpell:ignore imdb
 
