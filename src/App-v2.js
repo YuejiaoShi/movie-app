@@ -14,8 +14,8 @@ export default function App() {
   const [err, setErr] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
-  document.title="usePopcorn";
-  
+  document.title = "usePopcorn";
+
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (selectedId === id ? null : id));
   }
@@ -24,24 +24,29 @@ export default function App() {
     setSelectedId(null);
   }
   function handleAddWatched(movie) {
-    setWatched(watched=>[...watched, movie]);
+    setWatched((watched) => [...watched, movie]);
   }
   function handleDeleteWatched(id) {
-    setWatched(watched=>watched.filter(movie=>movie.imdbID !== id))
+    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
+
+  
   useEffect(
     function () {
+      const controller = new AbortController();
       async function fetchMovies() {
         try {
           setIsLoading(true);
           setErr("");
           const res = await fetch(
-            `https://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`
+            `https://www.omdbapi.com/?i=tt3896198&apikey=${KEY}&s=${query}`,
+            { signal: controller.signal }
           );
           if (!res.ok) throw new Error("Failed to fetch movies");
           const data = await res.json();
           if (data.Response === "False") throw new Error("Movie not found");
           setMovies(data.Search);
+          setErr("");
         } catch (err) {
           console.log(err.message);
           setErr(err.message);
@@ -49,14 +54,18 @@ export default function App() {
           setIsLoading(false);
         }
       }
-
-      if (!query.length) {
+      if (query.length < 3) {
         setMovies([]);
         setErr("");
         return;
       }
 
+      handleCloseMovieDetails();
       fetchMovies();
+
+      return function () {
+        controller.abort();
+      };
     },
     [query]
   );
@@ -82,12 +91,15 @@ export default function App() {
               selectedId={selectedId}
               onCloseMovieDetails={handleCloseMovieDetails}
               onAddWatched={handleAddWatched}
-              watched={watched} 
+              watched={watched}
             />
           ) : (
             <>
               <WatchedSummary watched={watched} />
-              <WatchedMovieList watched={watched} onDeleteWatched={handleDeleteWatched}/>
+              <WatchedMovieList
+                watched={watched}
+                onDeleteWatched={handleDeleteWatched}
+              />
             </>
           )}
         </Box>
@@ -148,13 +160,20 @@ function Box({ children }) {
   );
 }
 
-function MovieDetails({ selectedId, onCloseMovieDetails, onAddWatched, watched }) {
+function MovieDetails({
+  selectedId,
+  onCloseMovieDetails,
+  onAddWatched,
+  watched,
+}) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
 
-const isWatched = watched.map(movie=>movie.imdbID).includes(selectedId);
-const watchedUserRating = watched.find((movie) => movie.imdbID === selectedId)?.userRating;
+  const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
+  const watchedUserRating = watched.find(
+    (movie) => movie.imdbID === selectedId
+  )?.userRating;
 
   const {
     Title: title,
@@ -177,29 +196,29 @@ const watchedUserRating = watched.find((movie) => movie.imdbID === selectedId)?.
       poster,
       imdbRating: Number(imdbRating),
       runtime: Number(runtime.split(" ").at(0)),
-      userRating
+      userRating,
     };
 
     onAddWatched(newWatchedMovie);
-    onCloseMovieDetails()
+    onCloseMovieDetails();
   }
-// cSpell:ignore imdb
+  // cSpell:ignore imdb
 
-useEffect(
-  function () {
-    function Escape(e) {
-      if (e.code === "Escape") {
-        onCloseMovieDetails();
+  useEffect(
+    function () {
+      function Escape(e) {
+        if (e.code === "Escape") {
+          onCloseMovieDetails();
+        }
       }
-    }
-    document.addEventListener("keydown", Escape);
+      document.addEventListener("keydown", Escape);
 
-    return function () {
-      document.removeEventListener("keydown", Escape);
-    };
-  },
-  [onCloseMovieDetails]
-);
+      return function () {
+        document.removeEventListener("keydown", Escape);
+      };
+    },
+    [onCloseMovieDetails]
+  );
 
   useEffect(
     function () {
@@ -217,15 +236,17 @@ useEffect(
     [selectedId]
   );
 
-  useEffect(function(){
-    if(!title) return;
-    document.title=`Movie | ${title}`;
+  useEffect(
+    function () {
+      if (!title) return;
+      document.title = `Movie | ${title}`;
 
-  return function(){
-    document.title="usePopcorn";
-  };
-  
-},[title]);
+      return function () {
+        document.title = "usePopcorn";
+      };
+    },
+    [title]
+  );
 
   return (
     <div className="details">
@@ -252,7 +273,7 @@ useEffect(
           </header>
           <section>
             <div className="rating">
-            {!isWatched ? (
+              {!isWatched ? (
                 <>
                   <StarRating
                     maxRating={10}
@@ -267,11 +288,15 @@ useEffect(
                 </>
               ) : (
                 <p>
-                  You rated this movie <span style={{ fontSize: "large" }}>{watchedUserRating}</span> <span>⭐️</span>
+                  You rated this movie{" "}
+                  <span style={{ fontSize: "large" }}>{watchedUserRating}</span>{" "}
+                  <span>⭐️</span>
                 </p>
               )}
             </div>
-            <p><em>{plot}</em></p>
+            <p>
+              <em>{plot}</em>
+            </p>
             <p>Starring {actors}</p>
             <p>Directed by {director}</p>
           </section>
