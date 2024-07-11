@@ -139,7 +139,7 @@ function Search({ query, setQuery }) {
   useEffect(function () {
     document.addEventListener("keydown", callback);
     return () => document.addEventListener("keydown", callback);
-  }, []);
+  }, [setQuery]);
 
   return (
     <input
