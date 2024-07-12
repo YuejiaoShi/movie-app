@@ -94,22 +94,26 @@ function Logo() {
 }
 function Search({ query, setQuery }) {
   const inputEl = useRef(null);
+  useKey("Enter", function () {
+    if (document.activeElement === inputEl.current) return;
+    inputEl.current.focus();
+    setQuery("");
+  });
+  // useEffect(
+  //   function () {
+  //     function callback(e) {
+  //       if (e.code === "Enter") {
+  //         if (document.activeElement === inputEl.current) return;
+  //         inputEl.current.focus();
+  //         setQuery("");
+  //       }
+  //     }
 
-  useEffect(
-    function () {
-      function callback(e) {
-        if (document.activeElement === inputEl.current) return;
-        if (e.code === "Enter") {
-          inputEl.current.focus();
-          setQuery("");
-        }
-      }
-
-      document.addEventListener("keydown", callback);
-      return () => document.addEventListener("keydown", callback);
-    },
-    [setQuery]
-  );
+  //     document.addEventListener("keydown", callback);
+  //     return () => document.addEventListener("keydown", callback);
+  //   },
+  //   [setQuery]
+  // );
 
   return (
     <input
@@ -208,7 +212,6 @@ function MovieDetails({
   // cSpell:ignore imdb
 
   useKey("Escape", onCloseMovieDetails);
-
   // useEffect(
   //   function () {
   //     function Escape(e) {
