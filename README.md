@@ -17,7 +17,8 @@ usePopcorn is a dynamic React application for movie enthusiasts to discover, rat
 
 ## Visual Overview
 
-[<img src="https://github.com/user-attachments/assets/a7a9ef9d-d37f-4fa6-a88a-5a6dfd0e80b9" alt="Gif usePopcorn" width="600"/>](https://www.loom.com/share/b7b07953eaa747f8aef310d2017dd98c?sid=1d6e12a6-e996-45ba-90ad-20d9588c0f2f)
+[<img src="https://github.com/user-attachments/assets/b446b4cc-9a9c-410d-aeb0-02e5280f5c9f" alt="Gif usePopcorn"/>](https://www.loom.com/share/b7b07953eaa747f8aef310d2017dd98c?sid=1d6e12a6-e996-45ba-90ad-20d9588c0f2f)
+Click the gif to navigate to the video overview
 
 ## Features
 
