@@ -1,59 +1,50 @@
 # usePopcorn
 
-usePopcorn is a React application that enables users to explore movies, rate them, and manage their watched movies list. Integrated with the OMDB API (Open Movie Database), this app provides comprehensive movie information and allows users to track their movie-watching experience. Built as part of a course by Jonas Schmedtmann, usePopcorn demonstrates key React concepts and custom hook implementations.
+usePopcorn is a dynamic React application for movie enthusiasts to discover, rate, and manage their movie-watching experiences. Leveraging the OMDB API (Open Movie Database), this app provides rich movie information and allows users to curate their watched movies list. Developed as part of a course by Jonas Schmedtmann, usePopcorn showcases fundamental React principles and custom hook implementations.
 
-<div align="center">
-  <a href="https://www.loom.com/share/b7b07953eaa747f8aef310d2017dd98c?sid=1d6e12a6-e996-45ba-90ad-20d9588c0f2f">
-      <p>See overview video here</p></a>
-  <a href="https://www.loom.com/share/b7b07953eaa747f8aef310d2017dd98c?sid=1d6e12a6-e996-45ba-90ad-20d9588c0f2f">
-    <img style="width:600px;" src="https://github.com/user-attachments/assets/a7a9ef9d-d37f-4fa6-a88a-5a6dfd0e80b9"/>
-  </a>
-</div>
+## Live Demo
+
+[🍿 usePopcorn](https://movie-app-fawn-omega.vercel.app/)
+
+## Technologies and Techniques Used
+
+[<img alt="React" src="https://img.shields.io/badge/-React-45b8d8?style=flat-square&logo=react&logoColor=white" height="25">](https://reactjs.org/) Core library for building the user interface.  
+[<img alt="OMDB API" src="https://img.shields.io/badge/-OMDB_API-FF9D00?style=flat-square&logo=open-source&logoColor=white" height="25">](https://www.omdbapi.com/) Provides comprehensive movie data.  
+[<img alt="Local Storage" src="https://img.shields.io/badge/-Local_Storage-F4A300?style=flat-square&logo=web&logoColor=white" height="25">](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) For persisting the watched movies list across sessions.  
+[<img alt="React Hooks" src="https://img.shields.io/badge/-React_Hooks-61DAFB?style=flat-square&logo=react&logoColor=white" height="25">](https://reactjs.org/docs/hooks-intro.html) For managing state and side effects.  
+[<img alt="CSS Modules" src="https://img.shields.io/badge/-CSS_Modules-000000?style=flat-square&logo=css&logoColor=white" height="25">](https://github.com/css-modules/css-modules) For scoped and maintainable styles.
+
+
+## Visual Overview
+
+[<img src="https://github.com/user-attachments/assets/a7a9ef9d-d37f-4fa6-a88a-5a6dfd0e80b9" alt="Gif usePopcorn" width="600"/>](https://www.loom.com/share/b7b07953eaa747f8aef310d2017dd98c?sid=1d6e12a6-e996-45ba-90ad-20d9588c0f2f)
 
 ## Features
 
-- **Search Movies**: Search for movies using keywords and view the search results.
-- **Show Movie Details**: Display detailed information about a selected movie, including title, genre, plot, and ratings.
-- **Rate Movies and Add to Watched List**: Rate movies and add them to a personal watched list.
-- **Remove Movies from Watched List**: Remove movies from the watched list.
-- **Show Stats About Watched Movies**: View statistics such as average IMDb rating, user rating, and total runtime for watched movies.
+- **Search Movies**: Enter keywords to find movies and view search results.
+- **Show Movie Details**: Access detailed information including title, genre, plot, and ratings for selected movies.
+- **Rate Movies and Add to Watched List**: Rate movies and save them to a personal watched list.
+- **Remove Movies from Watched List**: Easily remove movies from the watched list.
+- **Show Stats About Watched Movies**: View stats like average IMDb rating, user rating, and total runtime for movies in the watched list.
 - **Keyboard Shortcuts**:
-  - Use the `Enter` key to focus on the search input and initiate a search.
-  - Use the `Escape` key to close the movie detail view.
-- **Local Storage Integration**: Persist watched movies list in the browser's local storage for data retention across sessions.
-
-## Usage
-
-1. **Search for Movies**:
-   Enter a keyword in the search input to find movies. Results will appear below the search bar.
-
-2. **View Movie Details**:
-   Click on a movie from the search results to view its details. You can see more information, rate the movie, and add it to your watched list.
-
-3. **Rate and Manage Watched Movies**:
-   Rate the movie and click “+ Add to list” to save it to your watched movies. Manage your watched list by removing movies or viewing statistics.
-
-4. **Keyboard Shortcuts**:
-   - Press `Enter` to focus on the search input and start searching.
-   - Press `Escape` to close the movie details view.
+  - Press `Enter` to focus on the search input and initiate a search.
+  - Press `Escape` to close the movie detail view.
+- **Local Storage Integration**: Save and load the watched movies list from browser local storage for persistence.
 
 ## Components and Hooks
 
 ### Components
 
-- **`App`**: Main application component that integrates all features and UI elements.
-- **`StarRating`**: Component for displaying and managing star ratings.
-- **`Nav`**: Navigation bar component containing the logo and search input.
-- **`MovieList`**: Displays a list of search results.
+- **`App`**: The main component that integrates all features and UI elements.
+- **`StarRating`**: Manages and displays star ratings for movies.
+- **`Nav`**: The navigation bar featuring the logo and search input.
+- **`MovieList`**: Displays a list of movies based on search results.
 - **`MovieDetails`**: Shows detailed information about a selected movie.
-- **`WatchedSummary`**: Displays statistics about watched movies.
-- **`WatchedMovieList`**: Lists movies in the watched list with options to delete.
+- **`WatchedSummary`**: Provides statistics on watched movies.
+- **`WatchedMovieList`**: Lists movies in the watched list with options to remove them.
 
 ### Hooks
 
-
-- **`useLocalStorage`**: Synchronizes React state with browser local storage. It initializes state from local storage and updates local storage when the state changes.
-
-- **`useKey`**: Handles keyboard events by listening for a specific key press and triggering a provided action.
-
-- **`useMovies`**: Fetches movie data from the OMDB API based on the search query. It manages loading states and errors during the data fetching process.
+- **`useLocalStorage`**: Syncs React state with browser local storage, initializing state from storage and updating storage on state changes.
+- **`useKey`**: Manages keyboard events, triggering actions based on specific key presses.
+- **`useMovies`**: Fetches movie data from the OMDB API according to the search query, handling loading states and errors.
