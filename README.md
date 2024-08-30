@@ -9,11 +9,10 @@ usePopcorn is a dynamic React application for movie enthusiasts to discover, rat
 ## Technologies and Techniques Used
 
 [<img alt="React" src="https://img.shields.io/badge/-React-45b8d8?style=flat-square&logo=react&logoColor=white" height="25">](https://reactjs.org/) Core library for building the user interface.  
-[<img alt="OMDB API" src="https://img.shields.io/badge/-OMDB_API-FF9D00?style=flat-square&logo=open-source&logoColor=white" height="25">](https://www.omdbapi.com/) Provides comprehensive movie data.  
-[<img alt="Local Storage" src="https://img.shields.io/badge/-Local_Storage-F4A300?style=flat-square&logo=web&logoColor=white" height="25">](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) For persisting the watched movies list across sessions.  
-[<img alt="React Hooks" src="https://img.shields.io/badge/-React_Hooks-61DAFB?style=flat-square&logo=react&logoColor=white" height="25">](https://reactjs.org/docs/hooks-intro.html) For managing state and side effects.  
-[<img alt="CSS Modules" src="https://img.shields.io/badge/-CSS_Modules-000000?style=flat-square&logo=css&logoColor=white" height="25">](https://github.com/css-modules/css-modules) For scoped and maintainable styles.
-
+[<img alt="Fetch API" src="https://img.shields.io/badge/-Fetch%20API-0a7c1e?style=flat-square&logo=web&logoColor=white" height="25">](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) For making network requests to fetch movie data.  
+[<img alt="Local Storage" src="https://img.shields.io/badge/-Local_Storage-F4A300?style=flat-square&logo=web&logoColor=white" height="25">](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) For persisting the watched movies list across sessions.   
+[<img alt="React Hooks" src="https://img.shields.io/badge/-React%20Hooks-61DAFB?style=flat-square&logo=react&logoColor=white" height="25">](https://reactjs.org/docs/hooks-intro.html) Custom and built-in hooks like useState, useEffect, useRef, and custom hooks like useMovies for managing state and side effects.   
+[<img alt="Keyboard Events" src="https://img.shields.io/badge/-Keyboard%20Events-5a5a5a?style=flat-square&logo=keyboard&logoColor=white" height="25">](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent) For handling keyboard interactions like focusing on input and closing modals.   
 
 ## Visual Overview
 
